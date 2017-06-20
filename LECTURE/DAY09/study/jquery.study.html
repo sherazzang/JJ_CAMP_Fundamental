@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+  <title>jQuery 스터디</title>
+  <link rel="stylesheet" href="css/jquery.study.css">
+  <script src="../../Library/jquery-3.2.1.min.js"></script>
+  <script src="js/jquery.review.js"></script>
+</head>
+<body>
+
+
+  <div class="container">
+    <!-- 동적 코드 추가 -->
+  </div>
+
+  <!-- .box 요소 추가 -->
+
+  <button type="button" class="ajax-call-button">Ajax Call</button>
+
+<script>
+  $('.ajax-call-button').on('click', function() {
+    $.get('https://unsplash.it/list')
+     .then(function(data) {
+       $.each(data, function(index, item) {
+         console.log(item);
+       });
+     });
+  })
+</script>
+</body>
+</html>

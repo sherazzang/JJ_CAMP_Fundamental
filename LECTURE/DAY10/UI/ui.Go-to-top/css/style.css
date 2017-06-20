@@ -1,0 +1,109 @@
+html * {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+*, *:after, *:before {
+  box-sizing: border-box;
+}
+body {
+  font-size: 100%;
+  font-family: "Bitter", sans-serif;
+  color: #f5f4ed;
+  background-color: #795d6b;
+}
+a {
+  color: #e86256;
+  text-decoration: none;
+}
+.y9-container {
+  width: 90%;
+  max-width: 768px;
+  margin: 2em auto;
+}
+.y9-container::after {
+  content: '';
+  display: table;
+  clear: both;
+}
+header {
+  background: #5c4751;
+  height: 100px;
+  text-align: center;
+}
+header h1 {
+  font-size: 20px;
+  font-size: 1.25rem;
+  font-weight: bold;
+  font-family: "Open Sans", sans-serif;
+  text-transform: uppercase;
+  font-weight: bold;
+  padding-top: 1.6em;
+  margin-bottom: .2em;
+}
+header p {
+  font-size: 13px;
+  font-size: 0.8125rem;
+  color: #957484;
+}
+main p {
+  font-size: 16px;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin: 2em 0;
+}
+.y9-top {
+  display: inline-block;
+  height: 40px;
+  width: 40px;
+  position: fixed;
+  bottom: 40px;
+  right: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  text-indent: 100%;
+  white-space: nowrap;
+  background: rgba(232, 98, 86, 0.8) url(../img/y9-top-arrow.svg) no-repeat center 50%;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity .3s 0s, visibility 0s .3s;
+}
+.y9-top.y9-is-visible, .y9-top.y9-fade-out, .no-touch .y9-top:hover {
+  transition: opacity .3s 0s, visibility 0s 0s;
+}
+.y9-top.y9-is-visible {
+  visibility: visible;
+  opacity: 1;
+}
+.y9-top.y9-fade-out {
+  opacity: .5;
+}
+.no-touch .y9-top:hover {
+  background-color: #e86256;
+  opacity: 1;
+}
+@media only screen and (min-width:768px) {
+  .y9-top {
+    right: 20px;
+    bottom: 20px;
+  }
+}
+@media only screen and (min-width:1024px) {
+  header {
+    height: 200px;
+  }
+  header h1 {
+    font-size: 30px;
+    font-size: 1.875rem;
+    padding-top: 2.6em;
+  }
+  main p {
+    font-size: 20px;
+    font-size: 1.25rem;
+  }
+  .y9-top {
+    height: 60px;
+    width: 60px;
+    right: 30px;
+    bottom: 30px;
+  }
+}

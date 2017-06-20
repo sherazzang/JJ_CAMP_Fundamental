@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Offcanvas Menus - jQuery Study</title>
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:400,700" rel="stylesheet">
+  <link rel="stylesheet" href="./css/reset.css">
+  <link rel="stylesheet" href="./css/style.css">
+  <script src="../../../Library/modernizr-2.8.3.js"></script>
+  <!-- <script src="https://unpkg.com/jquery"></script> -->
+  <script src="../../../Library/jquery-3.2.1.min.js"></script>
+  <script src="js/offcanvas-menus.js"></script>
+</head>
+
+<body>
+  <header>
+    <h1 class="brand">
+      <a href="">
+        <!-- <img src="./img/y9-logo.svg" alt="Home" width="40" height="40"> -->
+        <svg
+          version="1.1"
+          xmlns:sketch="http://www.bohemiancoding.com/sketch/ns"
+          xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="40px" height="40px"
+          viewBox="0 0 40 40"
+          enable-background="new 0 0 40 40"
+          xml:space="preserve"
+          aria-labeledby="brand brand-desc">
+          <title id="brand">brand</title>
+          <description id="brand-desc">brand description</description>
+          <g>
+            <g transform="translate(-30, -20)">
+              <circle class="circle" cx="50" cy="40" r="20"></circle>
+            </g>
+          </g>
+        </svg>
+      </a>
+    </h1>
+    <div class="y9-hamburger-menu">
+      <a role="button" class="y9-img-replace" href="#">Menu</a>
+    </div>
+    <nav class="main-nav">
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a class="current" href="#">Services</a></li>
+        <li><a href="#">Gallery</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="y9-cart-trigger">
+      <a role="button" class="y9-img-replace" href="#">Cart</a>
+    </div>
+  </header>
+  <main>
+    <ul class="y9-gallery-items y9-container">
+      <li>
+        <img class="is-rwd" src="img/thumb.jpg" alt="placeholder" width="372" height="350">
+      </li>
+      <li>
+        <img class="is-rwd" src="img/thumb.jpg" alt="placeholder" width="372" height="350">
+      </li>
+      <li>
+        <img class="is-rwd" src="img/thumb.jpg" alt="placeholder" width="372" height="350">
+      </li>
+      <li>
+        <img class="is-rwd" src="img/thumb.jpg" alt="placeholder" width="372" height="350">
+      </li>
+      <li>
+        <img class="is-rwd" src="img/thumb.jpg" alt="placeholder" width="372" height="350">
+      </li>
+      <li>
+        <img class="is-rwd" src="img/thumb.jpg" alt="placeholder" width="372" height="350">
+      </li>
+      <li>
+        <img class="is-rwd" src="img/thumb.jpg" alt="placeholder" width="372" height="350">
+      </li>
+      <li>
+        <img class="is-rwd" src="img/thumb.jpg" alt="placeholder" width="372" height="350">
+      </li>
+      <li>
+        <img class="is-rwd" src="img/thumb.jpg" alt="placeholder" width="372" height="350">
+      </li>
+    </ul>
+  </main>
+  <div class="y9-cart">
+    <h2>Cart</h2>
+    <ul class="y9-cart-items">
+      <li>
+        <span class="y9-qty">1x</span> Product Name
+        <div class="y9-price">$9.99</div>
+        <a href="#" class="y9-item-remove y9-img-replace">Remove</a>
+      </li>
+      <li>
+        <span class="y9-qty">2x</span> Product Name
+        <div class="y9-price">$19.98</div>
+        <a href="#" class="y9-item-remove y9-img-replace">Remove</a>
+      </li>
+      <li>
+        <span class="y9-qty">1x</span> Product Name
+        <div class="y9-price">$9.99</div>
+        <a href="#" class="y9-item-remove y9-img-replace">Remove</a>
+      </li>
+    </ul>
+    <div class="y9-cart-total">
+      <p>Total <span>$39.96</span></p>
+    </div>
+    <a href="#" class="checkout-btn">Checkout</a>
+    <p class="y9-go-to-cart"><a href="#">Go to cart page</a></p>
+  </div>
+  <div class="y9-shadow-layer"></div>
+</body>
+
+</html>

@@ -1,0 +1,115 @@
+/*! carousel.basic.css © yamoo9.net, 2017 */
+
+.is-list {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-left: 0;
+  list-style: none;
+}
+.is-rwd {
+  width: 100%;
+  height: auto;
+}
+.is-button {
+  border: none;
+  background: none;
+}
+body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.music-player {
+  position: relative;
+  overflow: hidden;
+  width: 400px;
+}
+.music-coverlist {
+  display: flex;
+  transform: translateX(0px);
+  transition: all 0.4s cubic-bezier(0.92, 0, 0.49, 0.47);
+}
+.music-cover-item {
+  flex: 1 0 400px;
+}
+.player-controller {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+.player-controller .button {
+  opacity: 0.85;
+  position: absolute;
+  top: 50%;
+  width: 24px;
+  height: 40px;
+  background: url("../images/icon-arrow-prev-next-bw.png") no-repeat;
+  background-size: 48px 80px;
+  transform: translateY(-50%);
+  transition: all 0.4s;
+}
+.player-controller .button:hover, .player-controller .button:focus {
+  opacity: 1;
+}
+.player-controller .button:focus {
+  box-shadow: 0 0 0px 3px #474cc5;
+}
+.player-controller .button:active {
+  box-shadow: none;
+}
+.player-controller .is-prev {
+  left: 10px;
+  background-position: 0 100%;
+}
+.player-controller .is-next {
+  right: 10px;
+  background-position: 100% 100%;
+}
+.player-indicators {
+  position: absolute;
+  z-index: 100;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.indicator {
+  opacity: 0.5;
+  cursor: pointer;
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background: #ddd;
+  border-radius: 50%;
+  margin-left: 5px;
+  margin-right: 5px;
+  font-size: 14px;
+  transition: all .3s ease;
+}
+.indicator:hover, .indicator:focus {
+  opacity: 1;
+  background: #fff;
+}
+.indicator.is-active {
+  opacity: 1;
+  background: #fff;
+  transform: scale(1.6);
+}
+.indicator:hover::before, .indicator:focus::before {
+  content: attr(aria-label);
+  position: absolute;
+  left: 50%;
+  bottom: 30px;
+  width: 180%;
+  color: #fff;
+  text-align: center;
+  text-shadow: 0 0 10px hsla(0, 0%, 0%, 0.5);
+  font-weight: 600;
+  transform: translateX(-50%);
+}
+.indicator.is-active:hover::before, .indicator.is-active:focus::before {
+  content: '';
+}

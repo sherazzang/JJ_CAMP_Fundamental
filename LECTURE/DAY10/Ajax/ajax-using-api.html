@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <title>Ajax 비동기 통신 - API 활용</title>
+  <style>
+    html {
+      font-size: 10px;
+    }
+    body {
+      margin: 0;
+      font-size: 1.8rem;
+    }
+    .container {
+      width: 90vw;
+      /*min-width: 960px;*/
+      margin-top: 3rem;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .button {
+      cursor: pointer;
+      border: none;
+      background: none;
+      font-size: 1.45rem;
+    }
+    .button.is-ajax-call {
+      border-radius: 3px;
+      padding: 0.56rem 0.85rem;
+      background: #fc414b;
+      color: #fff;
+    }
+    .header.is-fixed {
+      position: fixed;
+      z-index: 100;
+      top: 0;
+      left: 0;
+      right: 0;
+      box-shadow: inset 0 1px hsla(0, 0%, 100%, 0.75);
+      border-bottom: 1px solid hsla(0, 0%, 80%, 0.45);
+      padding: 2rem;
+      text-align: right;
+      background: hsla(0, 0%, 100%, 0.85);
+    }
+    .header.is-blur {
+      backdrop-filter: blur(2px);
+    }
+    .button.is-ajax-call:disabled {
+      background: #c6b5b5;
+    }
+    .movie-list {
+      list-style: none;
+      border-radius: 4px;
+      margin-top: 8rem;
+      padding: 2rem;
+      border: 4px solid #fc414b;
+    }
+    .movie-list__item {
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #fc4a54;
+    }
+    .movie-list__item a {
+      display: block;
+      overflow: hidden;
+      text-decoration: none;
+      color: #fc414b;
+    }
+    .movie-poster {
+      float: left;
+      margin-right: 1.4rem;
+      border: 1px solid #fc4a54;
+      padding: 0.45rem;
+    }
+    .movie-title {
+      margin: 0;
+      display: inline-block;
+      margin-bottom: 0.4rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px solid #efb9ba;
+    }
+    .movie-subtitle {
+      margin: 0;
+      font-weight: 200;
+    }
+    .movie-pubdate {
+      display: inline-block;
+      margin-top: 1rem;
+      color: #676767;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- 비동기 통신으로 무비 데이터 요청 버튼 -->
+    <div class="header is-fixed is-blur">
+      <button type="button" class="button is-ajax-call">NAVER 영화 데이터 GET</button>
+    </div>
+    <!-- 무비 리스트 출력 -->
+    <ul class="movie-list">
+      <!-- 전송받은 데이터를 출력할 템플릿 -->
+    </ul>
+  </div>
+
+<script src="../../Library/jquery-3.2.1.min.js"></script>
+<script>
+  // 서버에서 제공해주는 데이터(JSON 포멧)
+  var naver_movie_api = [
+    'https://api.myjson.com/bins/1cvje9',
+    'https://api.myjson.com/bins/13y1bl',
+    'https://api.myjson.com/bins/1h1kmp'
+  ];
+
+  // jQuery 라이브러리 Ajax 메서드를 사용하여 데이터를 로드하고 사용
+  jQuery(function($) {
+    // $는 안정적으로 jQuery를 가리킨다.
+
+    // jQuery Version 검증
+    // console.log('$().jquery:', $().jquery);
+
+    // jQuery.ajax() 메서드 API 확인
+
+    // 단축 메서드
+    // http://api.jquery.com/jQuery.get/
+    // $.get( naver_movie_api[0], function(response) {
+    //   console.log(1, response.items);
+    // } );
+
+    // $.ajax() 메서드
+    // http://api.jquery.com/jQuery.ajax/
+    // var $xhr = $.ajax({
+    //   url: naver_movie_api[1]
+    // })
+    // // 통신 성공할 경우, 호출되어 실행
+    // .done(function(response) {
+    //   console.log(2, response);
+    // });
+
+    // 버튼 탐색
+    var $ajax_btn = $('.button.is-ajax-call');
+    var $movie_list = $('.movie-list');
+    var page = 0;
+    // 버튼 이벤트 핸들링
+    $ajax_btn.on('click', loadMovieData);
+
+    // 버튼 트리거(방아쇠를 빵 땅기는 일)
+    $ajax_btn.trigger('click');
+    // 비동기 통신을 수행할 헨들러(함수) 작성
+    function loadMovieData() {
+      // naver_movie_api[page] 정보 값이 더 이상 존재하지 않는다면
+      // console.log('naver_movie_api[page]:', naver_movie_api[page]);
+      var isover_page = page > (naver_movie_api.length - 1);
+      if ( page > (naver_movie_api.length - 1) ) {
+        // 버튼 비활성화
+        // 속성: Attribute
+        // $ajax_btn.attr('속성이름', '속성 값');
+        // 참고 URL: http://api.jquery.com/attr/
+        // $ajax_btn.attr('disabled', 'disabled');
+        // 함수 종료
+        return;
+      }
+      // 버튼 비활성화, 함수 종료
+      // naver_movie_api[page] 정보값이 존재한다면 수행
+      $.ajax(naver_movie_api[page])
+       .done(function(response) {
+        // HTML 템플릿에 조립하여 화면에 뷰를 그릴 함수를 호출
+        renderStructure(response.items);
+        if ( page > (naver_movie_api.length - 1) ) {
+          $ajax_btn.attr('disabled', 'disabled');
+        }
+       });
+      page += 1;
+    }
+
+    function renderStructure(items) {
+      // TASK
+      // 템플릿 코드 작성
+      // 전달받은 items를 순환하여
+      // 템플릿 코드에 데이터 바인딩(연결)
+      // DOM 에 완성된 뷰 코드를 적용
+      var html_code = '';
+      $.each(items, function(index, item){
+        // console.log(item.link);
+        // console.log(item.image);
+        // console.log(item.title);
+        // console.log(item.subtitle);
+        // console.log(item.pubDate);
+        var $template = $('<li class="movie-list__item">\
+          <a target="_blank" href="'+ item.link +'">\
+            <img\
+              class="movie-poster"\
+              width="110"\
+              src="'+ (item.image || "http://placehold.it/110x158/fd414b/7d2025/?text=Poster") +'" alt>\
+            <h3 class="movie-title">'+ item.title +'</b></h3>\
+            <h4 class="movie-subtitle">'+ item.subtitle +'</h4>\
+            <sub class="movie-pubdate">'+ item.pubDate +'</sub>\
+          </a>\
+        </li>');
+        html_code += $template[0].outerHTML;
+        window.setTimeout(setDetectionHeight, 0);
+      });
+
+      // console.log('$movie_list:', $movie_list);
+      // 기존 코드를 지우고, 새로운 코드로 덮어쓰는 문제 발생
+      // $movie_list.html(html_code);
+
+      // 문제 해결을 위해 API를 참고하여 덮어쓰는 문제 해결
+      $movie_list.html(function(index, old_html) {
+        return old_html + html_code;
+      });
+    }
+
+    var document_height;
+    var detection_height;
+
+    function setDetectionHeight() {
+      document_height = $document.outerHeight(true);
+      detection_height = document_height - $window.height();
+    }
+
+    // jQuery 스크롤 이벤트 감지
+    var $window   = $(window);
+    var $document = $(document);
+    // var document_height = $document.outerHeight(true);
+    // var detection_height = document_height - $window.height();
+    $window.on('scroll', function (e) {
+      // .height()          === content-box hegiht
+      // .innerHeight()     === include padding
+      // .outerHeight()     === include border
+      // .outerHeight(true) === include margin
+      setDetectionHeight();
+      // console.log('문서의 높이:',document_height);
+      // console.log('감지할 높이:',detection_height - 200);
+      // console.log('스크롤 높이:',$window.scrollTop());
+      if ( detection_height === $window.scrollTop() ) {
+      // if ( (detection_height - 200) <= $window.scrollTop() ) {
+        // console.log('문서의 끝에서 200px 위에 도달했습니다.');
+        console.log('문서의 끝에 도달했습니다.');
+        loadMovieData();
+      }
+    });
+
+  });
+</script>
+</body>
+</html>

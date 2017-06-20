@@ -1,0 +1,17 @@
+/*! jquery.study.css © yamoo9.net, 2017 */
+.demo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column;
+  min-height: 100vh;
+  margin: 0px;
+}
+
+.app-title {
+  font-size: 4.625rem;
+}
+
+.page-footer {
+  margin-left: 100px;
+}

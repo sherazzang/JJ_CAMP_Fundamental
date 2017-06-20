@@ -1,0 +1,31 @@
+body {
+  margin: 3rem auto;
+  width: 960px;
+  font-family: "Spoqa Han Sans";
+  color: #626669;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 300;
+  color: #3fb5c8;
+}
+
+.answer-favorite-item {
+  cursor: pointer;
+  border: none;
+  border-radius: 4px;
+  padding: 1em;
+  background: #3fb5c8;
+  color: #fff;
+  transition: all .3s ease;
+}
+.answer-favorite-item:hover {
+  background: #217c90;
+  box-shadow: 0 2px 4px #3fb5c8;
+}
+
+.message-box {
+  padding: 1em;
+  background: #eee;
+}
+

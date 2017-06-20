@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta charset="UTF-8">
+  <title>SVG Circle Animation</title>
+  <style>
+    .demo {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      flex-flow: column;
+    }
+    .line-circle {
+      width: 200px;
+      height: 200px;
+      top: 0;
+      left: 0;
+    }
+
+    .line-circle-path {
+      stroke: #fc4a54;
+      stroke-width: 10px;
+      fill: none;
+    }
+
+    .line-circle-timer {
+      font-size: 1.6rem;
+      fill: #fc4a54;
+    }
+
+    line {
+      stroke: black;
+      stroke-width: 1;
+    }
+  </style>
+</head>
+
+<body class="demo">
+
+  <button type="button" class="svg-ani">Run! SVG Animatin</button>
+
+  <svg
+    class="line-circle"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    version="1.1"
+    viewBox="0 0 200 200"
+    preserveAspectRatio="none">
+      <circle
+        class="line-circle-path"
+        cx="100"
+        cy="100"
+        r="57"
+        transform="rotate(-90,100,100)"
+        stroke-dasharray="0, 360" />
+      <text
+        class="line-circle-timer"
+        text-anchor="middle"
+        x="103"
+        y="110">
+        0%
+      </text>
+  </svg>
+
+  <script>
+  (function() {
+
+    // 수학 트릭: 2 * PI * 57 = 358, 360도가 됨.
+    var circle          = document.querySelector('.line-circle-path');
+    var timer           = document.querySelector('.line-circle-timer');
+    var interval        = 30;
+    var angle           = 0;
+    var angle_increment = 6;
+
+    circle.setAttribute("stroke-dasharray", angle + ", 360");
+    timer.innerHTML = parseInt(angle / 360 * 100) + '%';
+
+    var svg_ani_btn = document.querySelector('.svg-ani');
+
+    svg_ani_btn.onclick = runSVGAni;
+
+    function runSVGAni() {
+      window.timer = window.setInterval(function () {
+        circle.setAttribute("stroke-dasharray", angle + ", 360");
+        timer.innerHTML = parseInt(angle/360*100) + '%';
+
+        if (angle >= 360) {
+            window.clearInterval(window.timer);
+        }
+
+        angle += angle_increment;
+
+      }.bind(this), interval);
+    }
+
+  })();
+  </script>
+</body>
+
+</html>
